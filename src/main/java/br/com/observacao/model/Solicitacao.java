@@ -1,13 +1,10 @@
 package br.com.observacao.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "solicitacoes")
+@Document(collection = "solicitacoes")
 public class Solicitacao {
 
     @Id
@@ -20,7 +17,6 @@ public class Solicitacao {
     private String prioridade;
 
     @NotBlank
-    @Column(length = 1000)
     private String descricao;
 
     private String status;
