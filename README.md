@@ -1,4 +1,20 @@
-# aep_2026.2
+# AEP 2026 - SEGUNDO SEMESTRE
+> ObservaAção
+
+## Definição do Problema
+O ObservaAção é um sistema de zeladoria urbana focado no cidadão. 
+O objetivo é solucionar a dificuldade de comunicação entre a população e os órgãos públicos, facilitando o registro de demandas da cidade (como buracos na via, falta de iluminação ou problemas na limpeza urbana). 
+A aplicação busca dar transparência a esse processo de atendimento. 
+O projeto foi desenhado com base no **ODS 16** (Paz, Justiça e Instituições Eficazes) da ONU, garantindo que as instituições públicas sejam mais responsivas, acessíveis e transparentes para a sociedade.
+
+## Funcionalidades
+Esta primeira versão da Prova de Conceito (PoC) funciona via linha de comando (CLI) e contempla as operações básicas de CRUD utilizando uma única coleção no banco de dados NoSQL:
+
+- **Registrar Solicitação (Create):** Criação de chamados informando categoria, prioridade e descrição. O sistema gera automaticamente um protocolo único de acompanhamento e define o prazo alvo (SLA) para a resolução.
+- **Listar Solicitações (Read):** Exibição geral de todos os chamados ativos no sistema para acompanhamento rápido.
+- **Ver Detalhes da Solicitação (Read):** Consulta completa de todas as informações e dados de um chamado específico utilizando o seu código de protocolo.
+- **Atualizar Status (Update):** Modificação do andamento de uma solicitação existente (ex: Triagem, Em Execução, Resolvido) através do seu identificador.
+- **Excluir Solicitação (Delete):** Remoção permanente de chamados do banco de dados.
 
 ## Tecnologias utilizadas
 
