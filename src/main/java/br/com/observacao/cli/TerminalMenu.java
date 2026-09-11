@@ -26,6 +26,7 @@ public class TerminalMenu implements CommandLineRunner {
             System.out.println("2. Listar solicitacoes");
             System.out.println("3. Atualizar status de solicitacao");
             System.out.println("4. Excluir solicitacao");
+            System.out.println("5. Ver detalhes da solicitacao");
             System.out.println("0. Sair");
             System.out.print("Escolha: ");
 
@@ -37,6 +38,7 @@ public class TerminalMenu implements CommandLineRunner {
                 case 2 -> listarSolicitacoes();
                 case 3 -> atualizarStatus(scanner);
                 case 4 -> excluirSolicitacao(scanner);
+                case 5 -> verDetalhesSolicitacao(scanner);
                 case 0 -> System.out.println("\nPrograma encerrado.");
                 default -> System.out.println("\nOpcao invalida.");
             }
@@ -119,6 +121,24 @@ public class TerminalMenu implements CommandLineRunner {
             System.out.println("\nSolicitacao excluida com sucesso!");
         } catch (Exception e) {
             System.out.println("\nErro ao excluir: " + e.getMessage());
+        }
+    }
+
+    private void verDetalhesSolicitacao(Scanner scanner) {
+        System.out.println("\n--- Detalhes da Solicitacao ---");
+        System.out.print("Digite o codigo do protocolo: ");
+        String codigo = scanner.nextLine();
+        try {
+            Solicitacao s = solicitacaoService.buscarPorCodigo(codigo);
+            System.out.println("Protocolo: " + s.getCodigo());
+            System.out.println("Categoria: " + s.getCategoria());
+            System.out.println("Prioridade: " + s.getPrioridade());
+            System.out.println("Status: " + s.getStatus());
+            System.out.println("Data: " + s.getData());
+            System.out.println("SLA: " + s.getSla());
+            System.out.println("Descricao: " + s.getDescricao());
+        } catch (Exception e) {
+            System.out.println("\nErro ao buscar: " + e.getMessage());
         }
     }
 }
