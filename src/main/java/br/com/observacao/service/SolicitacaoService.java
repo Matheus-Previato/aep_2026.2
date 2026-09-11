@@ -58,4 +58,9 @@ public class SolicitacaoService {
         solicitacao.setStatus(novoStatus);
         return repository.save(solicitacao);
     }
+
+    public void excluirPorCodigo(String codigo) {
+        Solicitacao solicitacao = buscarPorCodigo(codigo);
+        repository.delete(solicitacao);
+    }
 }
