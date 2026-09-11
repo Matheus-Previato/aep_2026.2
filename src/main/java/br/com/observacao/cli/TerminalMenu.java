@@ -75,8 +75,22 @@ public class TerminalMenu implements CommandLineRunner {
         };
         novaSolic.setCategoria(nomeCategoria);
 
-        System.out.print("Digite a prioridade (Alta/Media/Baixa): ");
-        novaSolic.setPrioridade(scanner.nextLine());
+        System.out.println("\nSelecione a prioridade:");
+        System.out.println("1. Alta");
+        System.out.println("2. Media");
+        System.out.println("3. Baixa");
+        System.out.print("Opcao de prioridade: ");
+
+        int opcaoPrioridade = scanner.nextInt();
+        scanner.nextLine();
+
+        String nomePrioridade = switch (opcaoPrioridade) {
+            case 1 -> "Alta";
+            case 2 -> "Media";
+            case 3 -> "Baixa";
+            default -> "Baixa";
+        };
+        novaSolic.setPrioridade(nomePrioridade);
 
         System.out.print("Digite a descricao (minimo 20 caracteres): ");
         novaSolic.setDescricao(scanner.nextLine());
