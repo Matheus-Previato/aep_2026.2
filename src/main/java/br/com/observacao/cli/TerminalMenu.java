@@ -30,8 +30,7 @@ public class TerminalMenu implements CommandLineRunner {
             System.out.println("0. Sair");
             System.out.print("Escolha: ");
 
-            opcao = scanner.nextInt();
-            scanner.nextLine();
+            opcao = lerInteiro(scanner);
 
             switch (opcao) {
                 case 1 -> registrarSolicitacao(scanner);
@@ -47,6 +46,16 @@ public class TerminalMenu implements CommandLineRunner {
         scanner.close();
     }
 
+    private int lerInteiro(Scanner scanner) {
+        while (true) {
+            try {
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.print("Entrada invalida. Digite um numero: ");
+            }
+        }
+    }
+
     private void registrarSolicitacao(Scanner scanner) {
         Solicitacao novaSolic = new Solicitacao();
 
@@ -59,8 +68,7 @@ public class TerminalMenu implements CommandLineRunner {
         System.out.println("6. Outros");
         System.out.print("Opcao de categoria: ");
 
-        int opcaoCategoria = scanner.nextInt();
-        scanner.nextLine();
+        int opcaoCategoria = lerInteiro(scanner);
 
         String nomeCategoria = switch (opcaoCategoria) {
             case 1 -> "Iluminacao";
@@ -81,8 +89,7 @@ public class TerminalMenu implements CommandLineRunner {
         System.out.println("3. Baixa");
         System.out.print("Opcao de prioridade: ");
 
-        int opcaoPrioridade = scanner.nextInt();
-        scanner.nextLine();
+        int opcaoPrioridade = lerInteiro(scanner);
 
         String nomePrioridade = switch (opcaoPrioridade) {
             case 1 -> "Alta";
