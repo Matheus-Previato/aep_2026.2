@@ -26,23 +26,34 @@ public class TerminalMenu implements CommandLineRunner {
             System.out.println("2. Listar solicitacoes");
             System.out.println("3. Atualizar status de solicitacao");
             System.out.println("4. Excluir solicitacao");
+            System.out.println("5. Ver detalhes da solicitacao");
             System.out.println("0. Sair");
             System.out.print("Escolha: ");
 
-            opcao = scanner.nextInt();
-            scanner.nextLine();
+            opcao = lerInteiro(scanner);
 
             switch (opcao) {
                 case 1 -> registrarSolicitacao(scanner);
                 case 2 -> listarSolicitacoes();
                 case 3 -> atualizarStatus(scanner);
                 case 4 -> excluirSolicitacao(scanner);
+                case 5 -> verDetalhesSolicitacao(scanner);
                 case 0 -> System.out.println("\nPrograma encerrado.");
                 default -> System.out.println("\nOpcao invalida.");
             }
         }
 
         scanner.close();
+    }
+
+    private int lerInteiro(Scanner scanner) {
+        while (true) {
+            try {
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.print("Entrada invalida. Digite um numero: ");
+            }
+        }
     }
 
     private void registrarSolicitacao(Scanner scanner) {
@@ -57,8 +68,7 @@ public class TerminalMenu implements CommandLineRunner {
         System.out.println("6. Outros");
         System.out.print("Opcao de categoria: ");
 
-        int opcaoCategoria = scanner.nextInt();
-        scanner.nextLine();
+        int opcaoCategoria = lerInteiro(scanner);
 
         String nomeCategoria = switch (opcaoCategoria) {
             case 1 -> "Iluminacao";
@@ -73,8 +83,21 @@ public class TerminalMenu implements CommandLineRunner {
         };
         novaSolic.setCategoria(nomeCategoria);
 
-        System.out.print("Digite a prioridade (Alta/Media/Baixa): ");
-        novaSolic.setPrioridade(scanner.nextLine());
+        System.out.println("\nSelecione a prioridade:");
+        System.out.println("1. Alta");
+        System.out.println("2. Media");
+        System.out.println("3. Baixa");
+        System.out.print("Opcao de prioridade: ");
+
+        int opcaoPrioridade = lerInteiro(scanner);
+
+        String nomePrioridade = switch (opcaoPrioridade) {
+            case 1 -> "Alta";
+            case 2 -> "Media";
+            case 3 -> "Baixa";
+            default -> "Baixa";
+        };
+        novaSolic.setPrioridade(nomePrioridade);
 
         System.out.print("Digite a descricao (minimo 20 caracteres): ");
         novaSolic.setDescricao(scanner.nextLine());
@@ -119,6 +142,24 @@ public class TerminalMenu implements CommandLineRunner {
             System.out.println("\nSolicitacao excluida com sucesso!");
         } catch (Exception e) {
             System.out.println("\nErro ao excluir: " + e.getMessage());
+        }
+    }
+
+    private void verDetalhesSolicitacao(Scanner scanner) {
+        System.out.println("\n--- Detalhes da Solicitacao ---");
+        System.out.print("Digite o codigo do protocolo: ");
+        String codigo = scanner.nextLine();
+        try {
+            Solicitacao s = solicitacaoService.buscarPorCodigo(codigo);
+            System.out.println("Protocolo: " + s.getCodigo());
+            System.out.println("Categoria: " + s.getCategoria());
+            System.out.println("Prioridade: " + s.getPrioridade());
+            System.out.println("Status: " + s.getStatus());
+            System.out.println("Data: " + s.getData());
+            System.out.println("SLA: " + s.getSla());
+            System.out.println("Descricao: " + s.getDescricao());
+        } catch (Exception e) {
+            System.out.println("\nErro ao buscar: " + e.getMessage());
         }
     }
 }
